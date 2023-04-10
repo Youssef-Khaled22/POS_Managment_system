@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" prefHeight="368.0" prefWidth="603.0" style="-fx-background-color: #2A0033;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pos_system.CustomerControllers">
+   <children>
+      <TextField fx:id="IDText" layoutX="226.0" layoutY="59.0" promptText="barcode" style="-fx-text-fill: #000000; -fx-border-color: #9643A9; -fx-border-insets: 0; -fx-border-width: 1px; -fx-border-radius: 20; -fx-background-radius: 20;" AnchorPane.leftAnchor="226.0" />
+      <Button layoutX="248.0" layoutY="109.0" mnemonicParsing="false" onAction="#Search" prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #1c0486; -fx-background-radius: 20; -fx-background-insets: 0; -fx-font-size: 14px; -fx-font-weight: bold;" text="Search" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Text fill="#e2c6e4" layoutX="124.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Barcode" wrappingWidth="81.59999999999991" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="397.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <TextField fx:id="IDText1" layoutX="476.0" layoutY="314.0" prefHeight="27.0" prefWidth="81.0" promptText="ID" style="-fx-text-fill: #000000; -fx-border-color: #9643A9; -fx-border-insets: 0; -fx-border-width: 1px; -fx-border-radius: 20; -fx-background-radius: 20;" />
+      <Button layoutX="404.0" layoutY="312.0" mnemonicParsing="false" onAction="#Login" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: #1c0486; -fx-background-radius: 20; -fx-background-insets: 0; -fx-font-size: 14px; -fx-font-weight: bold;" text="Login" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="81.0" layoutY="312.0" mnemonicParsing="false" onAction="#Back_button" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #b50811; -fx-background-insets: 0; -fx-background-radius: 20;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="576.0" layoutY="-4.0" onMouseClicked="#close" prefHeight="35.0" prefWidth="14.0" text="x" textFill="#e2c6e4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label layoutX="557.0" layoutY="-4.0" onMouseClicked="#mini" prefHeight="16.0" prefWidth="13.0" text="-" textFill="#e2c6e4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <GridPane layoutX="22.0" layoutY="158.0" prefHeight="132.0" prefWidth="579.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="170.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="127.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="185.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="101.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fill="#e2c6e4" strokeType="OUTSIDE" strokeWidth="0.0" text="Made in :" wrappingWidth="88.11693572998024" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Text>
+            <Label fx:id="country" prefHeight="35.0" prefWidth="108.0" text="country" textFill="#e2c6e4" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Text fill="#e2c6e4" strokeType="OUTSIDE" strokeWidth="0.0" text="Category :" wrappingWidth="96.9169921875" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Text>
+            <Label fx:id="category" prefHeight="35.0" prefWidth="97.0" text="category" textFill="#e2c6e4" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Text fill="#e2c6e4" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Name :" wrappingWidth="151.19999999999982">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Text>
+            <Label fx:id="name" prefHeight="35.0" prefWidth="108.0" text="name" textFill="#e2c6e4" GridPane.columnIndex="1">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Text fill="#e2c6e4" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration Date :" wrappingWidth="151.19999999999982" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Text>
+            <Label fx:id="expdate" prefHeight="35.0" prefWidth="131.0" text="expdate" textFill="#e2c6e4" GridPane.columnIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Text fill="#e2c6e4" strokeType="OUTSIDE" strokeWidth="0.0" text="Price :" wrappingWidth="55.31695556640625" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Text>
+            <Label fx:id="price" prefHeight="35.0" prefWidth="108.0" text="price" textFill="#e2c6e4" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Text fill="#e2c6e4" strokeType="OUTSIDE" strokeWidth="0.0" text="Production Date :" wrappingWidth="160.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Text>
+            <Label fx:id="proddate" prefHeight="35.0" prefWidth="131.0" text="proddate" textFill="#e2c6e4" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="541.0" prefWidth="680.0" style="-fx-background-color: #cec7ce;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pos_system.FeedbackAndRatingController">
+   <children>
+      <TableView fx:id="FeedbackAndRatingTable" layoutX="5.0" layoutY="53.0" prefHeight="405.0" prefWidth="669.0" style="-fx-border-color: F6F6F6;">
+        <columns>
+          <TableColumn fx:id="ID_column" prefWidth="28.66665554046631" text="ID" />
+          <TableColumn fx:id="feedbackColumn" prefWidth="587.3333625793457" text="Feedback Message" />
+            <TableColumn fx:id="ratingColumn" prefWidth="24.0" />
+        </columns>
+      </TableView>
+      <Label fx:id="averageRatingB" layoutX="11.0" layoutY="485.0" prefHeight="27.0" prefWidth="657.0" text="averageRating" textFill="#2a0033" visible="false">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="averageRatingW" layoutX="9.0" layoutY="485.0" prefHeight="27.0" prefWidth="662.0" text="averageRating" textFill="#b50811" visible="false">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="starsTable" layoutX="642.0" layoutY="53.0" prefHeight="405.0" prefWidth="37.0" style="-fx-border-color: F6F6F6;">
+        <columns>
+          <TableColumn fx:id="starsImageColumn" prefWidth="31.99993896484375" />
+        </columns>
+      </TableView>
+      <Label layoutX="624.0" layoutY="56.0" prefHeight="22.0" prefWidth="53.0" style="-fx-background-color: EAEAEA;" text="  Rating">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

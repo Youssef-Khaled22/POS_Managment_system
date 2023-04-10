@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="544.0" style="-fx-background-color: #2A0033;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pos_system.RegistrationController">
+    <children>
+        <Pane layoutX="-2.0" layoutY="123.0" prefHeight="457.0" prefWidth="545.0">
+            <children>
+                <Button fx:id="save_button" layoutX="308.0" layoutY="404.0" mnemonicParsing="false" onAction="#save" prefHeight="32.0" prefWidth="92.0" style="-fx-background-color: #1c0486; -fx-background-insets: 0; -fx-background-radius: 20;" text="SAVE" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Label layoutX="15.0" layoutY="188.0" prefHeight="28.0" prefWidth="71.0" text="Gender:" textFill="#e2c6e4">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <GridPane layoutX="1.0" layoutY="2.0" prefHeight="171.0" prefWidth="536.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.66665649414062" minWidth="10.0" prefWidth="81.66664632161458" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.33334350585938" minWidth="10.0" prefWidth="189.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.66668701171875" minWidth="10.0" prefWidth="65.33335367838544" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.99995930989581" minWidth="10.0" prefWidth="194.66664632161456" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="tx_id" prefHeight="28.0" prefWidth="180.0" promptText="National ID" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" GridPane.columnIndex="1">
+                            <GridPane.margin>
+                                <Insets left="5.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="tx_name" prefHeight="28.0" prefWidth="191.0" promptText="Full Name" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" GridPane.columnIndex="3">
+                            <GridPane.margin>
+                                <Insets right="5.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <Label prefWidth="28.0" text="ID:" textFill="#e2c6e4">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="20.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <Label text="Name:" textFill="#e2c6e4" GridPane.columnIndex="2">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="5.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <Label text="Salary:" textFill="#e2c6e4" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="10.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="tx_salary" prefHeight="28.0" prefWidth="191.0" promptText="Salary" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets left="5.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <Label text="Address:" textFill="#e2c6e4" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="5.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="tx_address" prefHeight="28.0" prefWidth="191.0" promptText="Detailed address" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets right="5.0" />
+                            </GridPane.margin>
+                        </TextField>
+                        <Label text="Phone:" textFill="#e2c6e4" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="5.0" />
+                            </GridPane.margin>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <padding>
+                                <Insets left="5.0" />
+                            </padding>
+                        </Label>
+                        <TextField fx:id="tx_phone" prefHeight="28.0" prefWidth="191.0" promptText="Phone" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets right="5.0" />
+                            </GridPane.margin>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                        </TextField>
+                        <Label text="Birth Date:" textFill="#e2c6e4" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <padding>
+                                <Insets left="10.0" />
+                            </padding>
+                        </Label>
+                        <TextField fx:id="tx_birthdate" prefHeight="28.0" prefWidth="191.0" promptText="yyyy-mm-dd" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets left="5.0" />
+                            </GridPane.margin>
+                        </TextField>
+                    </children>
+                </GridPane>
+                <RadioButton fx:id="rd_male" layoutX="94.0" layoutY="193.0" mnemonicParsing="false" onAction="#selectGender" text="Male" textFill="#e2c6e4">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="gender" />
+                    </toggleGroup>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+                </RadioButton>
+                <RadioButton fx:id="rd_female" layoutX="162.0" layoutY="193.0" mnemonicParsing="false" onAction="#selectGender" text="Female" textFill="#e2c6e4" toggleGroup="$gender">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+                </RadioButton>
+                <GridPane layoutX="62.0" layoutY="259.0" prefHeight="112.0" prefWidth="398.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.9999796549479" minWidth="10.0" prefWidth="135.3333536783854" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0000203450521" minWidth="10.0" prefWidth="244.6666463216146" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Username:" textFill="#e2c6e4">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="30.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <Label text="Password:" textFill="#e2c6e4" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="30.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="tx_username" prefHeight="28.0" prefWidth="181.0" promptText="Username" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" GridPane.columnIndex="1" />
+                        <PasswordField fx:id="pf_conf_password" prefHeight="28.0" prefWidth="167.0" promptText="confirm password" style="-fx-background-color: #2A0033; -fx-border-color: #9643A9; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <opaqueInsets>
+                                <Insets right="15.0" />
+                            </opaqueInsets>
+                            <GridPane.margin>
+                                <Insets />
+                            </GridPane.margin>
+                        </PasswordField>
+                        <PasswordField fx:id="pf_password" prefHeight="28.0" prefWidth="167.0" promptText="password" style="-fx-background-color: #2A0033; -fx-border-color: #9643A9; -fx-background-insets: 0; -fx-border-radius: 20;" styleClass="text-input" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <opaqueInsets>
+                                <Insets right="15.0" />
+                            </opaqueInsets>
+                        </PasswordField>
+                        <Label text="Confirm Password:" textFill="#e2c6e4" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="10.0" />
+                            </GridPane.margin>
+                        </Label>
+                    </children>
+                </GridPane>
+                <Line endX="231.00003051757812" endY="-3.0517578125E-5" layoutX="266.0" layoutY="384.0" startX="-215.00001525878906" startY="-3.0517578125E-5" stroke="#9643a9" />
+                <Line endX="231.00003051757812" endY="-3.0517578125E-5" layoutX="266.0" layoutY="238.0" startX="-215.00001525878906" startY="-3.0517578125E-5" stroke="#9643a9" />
+                <Button fx:id="cancel_button" layoutX="162.0" layoutY="404.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="92.0" style="-fx-background-color: #b50811; -fx-background-insets: 0; -fx-background-radius: 20;" text="Back" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+                </Button>
+                <ComboBox fx:id="jop_choiceBox" layoutX="340.0" layoutY="184.0" prefHeight="28.0" prefWidth="191.0" style="-fx-border-color: #9643A9; -fx-background-color: #2A0033; -fx-border-radius: 5;" styleClass="cell" stylesheets="@style.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+                <Label layoutX="294.0" layoutY="192.0" prefWidth="28.0" text="Jop:" textFill="#e2c6e4">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Label layoutX="166.0" layoutY="41.0" prefHeight="45.0" prefWidth="211.0" text="Registration" textFill="#e2c6e4">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        <Label layoutX="522.0" layoutY="-2.0" onMouseClicked="#exit" prefHeight="27.0" prefWidth="5.0" text="x" textFill="#e2c6e4">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+        </Label>
+        <Label layoutX="502.0" layoutY="-2.0" onMouseClicked="#minimize" prefHeight="16.0" prefWidth="13.0" text="-" textFill="#e2c6e4">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+        </Label>
+        <Line endX="231.00003051757812" endY="-3.0517578125E-5" layoutX="263.0" layoutY="110.0" startX="-215.00001525878906" startY="-3.0517578125E-5" stroke="#9643a9" />
+    </children>
+</AnchorPane>
