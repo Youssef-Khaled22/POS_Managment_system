@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane fx:id="pane" prefHeight="483.0" prefWidth="472.0" style="-fx-background-color: #2A0033;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pos_system.CustomerEmailController">
+   <children>
+      <Text fill="#e2c6e4" layoutX="93.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="24.9169921875">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="#e2c6e4" layoutX="61.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash Back" wrappingWidth="100.79998779296875">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="#e2c6e4" layoutX="28.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Evaluation" wrappingWidth="166.91693115234375">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Rating fx:id="rating" layoutX="230.0" layoutY="168.0" scaleX="0.9" scaleY="0.9" />
+      <Text fill="#e2c6e4" layoutX="37.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Give us your feedback" wrappingWidth="135.31695556640625">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="messagetext" layoutX="194.0" layoutY="233.0" prefHeight="144.0" prefWidth="248.0" promptText="write message here" />
+      <Button fx:id="submit" layoutX="265.0" layoutY="415.0" mnemonicParsing="false" onAction="#submitButton" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #1c0486; -fx-background-radius: 20; -fx-background-insets: 0; -fx-font-size: 14px; -fx-font-weight: bold;" text="Submit" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="116.0" layoutY="415.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="92.0" style="-fx-background-color: #b50811; -fx-background-insets: 0; -fx-background-radius: 20;" text="BACK" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="442.0" layoutY="-4.0" onMouseClicked="#exit" prefHeight="27.0" prefWidth="5.0" text="x" textFill="#e2c6e4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label layoutX="420.0" layoutY="-4.0" onMouseClicked="#minimize" prefHeight="16.0" prefWidth="13.0" text="-" textFill="#e2c6e4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="IDL" layoutX="311.0" layoutY="49.0" prefHeight="35.0" prefWidth="87.0" text="ID" textFill="#e2c6e4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="cashbackL" layoutX="311.0" layoutY="105.0" prefHeight="35.0" prefWidth="87.0" text="ID" textFill="#e2c6e4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <ImageView fitHeight="84.0" fitWidth="99.0" layoutX="51.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@feedback.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

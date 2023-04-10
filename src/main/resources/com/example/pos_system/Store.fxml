@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="780.0" style="-fx-background-color: #2A0033;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pos_system.productControllers">
+   <children>
+      <Text fill="#e2c6e4" layoutX="296.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" wrappingWidth="80.9169921875">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="#e2c6e4" layoutX="311.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products">
+         <font>
+            <Font name="Arial Bold" size="36.0" />
+         </font>
+      </Text>
+      <TextField fx:id="categoryText" layoutX="390.0" layoutY="79.0" promptText="Category" style="-fx-text-fill: #000000; -fx-border-color: #9643A9; -fx-border-insets: 0; -fx-border-width: 1px; -fx-border-radius: 20; -fx-background-radius: 20;" />
+      <TextField fx:id="idText" layoutX="86.0" layoutY="79.0" promptText="ID" style="-fx-text-fill: #000000; -fx-border-color: #9643A9; -fx-border-insets: 0; -fx-border-width: 1px; -fx-border-radius: 20; -fx-background-radius: 20;" />
+      <Button layoutX="311.0" layoutY="132.0" mnemonicParsing="false" onMouseClicked="#EDIIIT" prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #1c0486; -fx-background-radius: 20; -fx-background-insets: 0; -fx-font-size: 14px; -fx-font-weight: bold;" text="Edit" textFill="WHITE" AnchorPane.leftAnchor="336.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="585.0" layoutY="77.0" mnemonicParsing="false" onAction="#Search" prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #1c0486; -fx-background-radius: 20; -fx-background-insets: 0; -fx-font-size: 14px; -fx-font-weight: bold;" text="Search" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="585.0" layoutY="132.0" mnemonicParsing="false" onMouseClicked="#refreshView" prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #1c0486; -fx-background-radius: 20; -fx-background-insets: 0; -fx-font-size: 14px; -fx-font-weight: bold;" text="Refresh" textFill="WHITE" AnchorPane.rightAnchor="141.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="74.0" layoutY="132.0" mnemonicParsing="false" onMouseClicked="#getAddView" prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #1c0486; -fx-background-radius: 20; -fx-background-insets: 0; -fx-font-size: 14px; -fx-font-weight: bold;" text="Add" textFill="WHITE" AnchorPane.leftAnchor="141.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="334.0" layoutY="569.0" mnemonicParsing="false" onAction="#Logout_button" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #b50811; -fx-background-insets: 0; -fx-background-radius: 20;" text="Logout" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TableView fx:id="productTables" layoutX="31.0" layoutY="183.0" prefHeight="366.0" prefWidth="770.0" style="-fx-alignment: CENTER;" AnchorPane.leftAnchor="5.0">
+         <columns>
+            <TableColumn fx:id="idCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="ID" />
+            <TableColumn fx:id="nameCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="Name" />
+            <TableColumn fx:id="priceCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="Price After" />
+            <TableColumn fx:id="offerCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="Price Before" />
+            <TableColumn fx:id="quantityCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="Quantity" />
+            <TableColumn fx:id="prodDateCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="ProdDate" />
+            <TableColumn fx:id="expDateCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="EXpDate" />
+            <TableColumn fx:id="salesCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="Sales" />
+            <TableColumn fx:id="categoryCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="Country" />
+            <TableColumn fx:id="countryCol" prefWidth="77.0" style="-fx-alignment: BASELINE_CENTER;" text="Category" />
+         </columns>
+      </TableView>
+      <Text fill="#e2c6e4" layoutX="43.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="24.9169921875">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Label layoutX="752.0" layoutY="-1.0" onMouseClicked="#exit" prefHeight="27.0" prefWidth="5.0" text="x" textFill="#e2c6e4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label layoutX="730.0" layoutY="-1.0" onMouseClicked="#minimize" prefHeight="16.0" prefWidth="13.0" text="-" textFill="#e2c6e4">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+   </children>
+</AnchorPane>
