@@ -1,0 +1,37 @@
+drop database if exists pos_msystem ;
+create database pos_msystem;
+use pos_msystem;
+create table product (
+id int primary key auto_increment unique,
+proName varchar(45),
+priceA float,
+priceB float,
+quantity int,
+EXpDate date,
+prodDate date,
+numOfSales int,
+counteryofprod varchar(45),
+category varchar(45));
+
+create table employees(
+id varchar(14) unique,   /*National ID*/
+name varchar(45),
+jop varchar(25),
+gender boolean,   /*m=1 , f=0*/
+salary int,
+address varchar(100),
+birthDate date,
+phone varchar(15),
+userName varchar(15) primary key unique,
+password varchar(32) );
+
+create table customer(
+id int primary key auto_increment,
+servesEvaluation int(5),
+cashback float,    /*Subtract cashback from total of recipt ex(100->2Cashback == next 100->98buy & 2% of 98 is Cashback*/
+massage varchar(255));
+select * from customer;
+--SELECT max(id) from customer;
+--insert into customer () values ();
+--insert into customer (cashback) values (0);
+--insert into customer (servesEvaluation, cashback,massage ) values (5,0,"") ;
