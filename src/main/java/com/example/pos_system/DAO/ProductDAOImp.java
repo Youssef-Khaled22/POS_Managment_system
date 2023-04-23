@@ -124,8 +124,8 @@ public class ProductDAOImp implements ProductDAO {
 
     @Override
     public void ExpDate() {
-        String query="SELECT *FROM product";
-        Connection connection= DBConnection.getConnection();;
+        String query="SELECT *FROM product ORDER BY ExpDate LIMIT 5";
+        Connection connection= DBConnection.getConnection();
         try(PreparedStatement preparedStatement=connection.prepareStatement(query)) {
             productList.clear();
             ResultSet resultSet=preparedStatement.executeQuery();
