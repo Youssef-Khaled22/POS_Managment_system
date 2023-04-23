@@ -53,7 +53,18 @@ class ProductDAOTest {
 
     @org.junit.jupiter.api.Test
     void expDate() {
-
+        ProductDAOImp obj = new ProductDAOImp();
+        obj.ExpDate();
+        assertEquals(Date.valueOf("2028-01-01"),obj.getNearest5ExpDate()[0]);
+        assertEquals(Date.valueOf("2030-01-01"),obj.getNearest5ExpDate()[1]);
+        assertEquals(Date.valueOf("2030-01-01"),obj.getNearest5ExpDate()[2]);
+        assertEquals(Date.valueOf("2030-01-01"),obj.getNearest5ExpDate()[3]);
+        assertEquals(Date.valueOf("2035-01-01"),obj.getNearest5ExpDate()[4]);
+        assertEquals("Realme 10 pro",obj.getNameOfNearest5ExpDate()[0]);
+        assertEquals("Redmi 12pro",obj.getNameOfNearest5ExpDate()[1]);
+        assertEquals("OPPO reno 8",obj.getNameOfNearest5ExpDate()[2]);
+        assertEquals("Samsung Galaxy Note 20 5G",obj.getNameOfNearest5ExpDate()[3]);
+        assertEquals("Iphone 14 pro MAX",obj.getNameOfNearest5ExpDate()[4]);
     }
 
 
