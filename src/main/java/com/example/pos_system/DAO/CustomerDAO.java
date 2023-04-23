@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 
 public interface CustomerDAO {
     Customer getCustomer(int id);
-
     public boolean isExist(int id);
     int getCashback(int id);
     void UpdateCashback(Customer customer, int id);

@@ -18,6 +18,8 @@ public class CashierDAOImp implements CashierDAO {
 
     public String[] getNameOfMost5Selling() {
         MostSelling();
+        if(Most5Selling.length < 5)
+            return null;
         return NameOfMost5Selling;
     }
 
