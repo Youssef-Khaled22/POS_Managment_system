@@ -37,14 +37,6 @@ public class EmployeesDAOImp implements EmployeeDAO{
         return employees;
     }
 
-    public List<Employees> find(String colum) {
-        Connection conn= DBConnection.getConnection();
-        if (conn==null)
-            return null;
-        ObservableList<Employees> employees=FXCollections.observableArrayList();
-        String query="select "+colum+" from employees";
-        return getEmployees(conn, employees, query);
-    }
     @Override
     public Employees findByUserName(String userName) {
         Connection conn= DBConnection.getConnection();
