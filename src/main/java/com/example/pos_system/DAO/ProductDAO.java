@@ -13,4 +13,5 @@ public interface ProductDAO {
     void ExpDate();
 
     int allSales();
+
 }
