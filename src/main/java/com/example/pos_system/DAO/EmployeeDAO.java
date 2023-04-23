@@ -8,8 +8,6 @@ import java.util.List;
 public interface EmployeeDAO {
     ObservableList<Employees> findAll();
 
-    List<Employees> find(String colum);//ممكن امسحها
-
     Employees findByUserName(String userName);
 
     void add(Employees employee);

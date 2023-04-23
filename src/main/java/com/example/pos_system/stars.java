@@ -3,7 +3,7 @@ package com.example.pos_system;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class /**/stars {
+public class  stars {
     private ImageView image;
 
     public ImageView getImage() {
