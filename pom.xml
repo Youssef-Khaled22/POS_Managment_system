@@ -45,6 +45,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+<<<<<<< HEAD
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>RELEASE</version>
@@ -57,6 +58,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+=======
+>>>>>>> 3707c8ceff5256b733c3bf66236b32cc02df412f
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.8.2</version>

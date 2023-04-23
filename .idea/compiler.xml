@@ -9,5 +9,8 @@
         <module name="POS_SYSTEM" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="POS_SYSTEM" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>
