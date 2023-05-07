@@ -2,7 +2,6 @@ package com.example.pos_system.DAO;
 
 import com.example.pos_system.POS_System;
 import com.example.pos_system.model.Employees;
-import org.testng.annotations.Test;
 
 import java.sql.Date;
 

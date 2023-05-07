@@ -9,11 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CashierDAOImp implements CashierDAO {
-
     ObservableList<Product> productList = FXCollections.observableArrayList();
 
     //MostSelling
-    private int[] Most5Selling = new int[5];
+    private int[] Most5Selling;
     private String[] NameOfMost5Selling = new String[5];
 
     public String[] getNameOfMost5Selling() {
@@ -25,6 +24,8 @@ public class CashierDAOImp implements CashierDAO {
 
     public int[] getMost5Selling() {
         MostSelling();
+        if(Most5Selling.length < 5)
+            return null;
         return Most5Selling;
     }
 
@@ -102,7 +103,8 @@ public class CashierDAOImp implements CashierDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        for (int i = 0; i < 5; i++) {
+        Most5Selling = new int[productList.size()];
+        for (int i = 0; i < productList.size(); i++) {
             Most5Selling[i] = productList.get(i).getNumOfSales();
             NameOfMost5Selling[i] = productList.get(i).getProName();
         }
@@ -163,4 +165,5 @@ public class CashierDAOImp implements CashierDAO {
         }
         return id;
     }
+
 }
