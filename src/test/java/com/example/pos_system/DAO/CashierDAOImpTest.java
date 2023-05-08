@@ -12,10 +12,13 @@ import static org.mockito.Mockito.*;
 class CashierDAOImpTest {
     CashierDAOImp cashierDAOImp = new CashierDAOImp();
 
-    int i = 20;
+    int i = 82; //+=2
+    int q = 73, numSales = 127; // --, ++
+    int id = 114;    //+=3
+
     @org.junit.jupiter.api.Test
     void getNameOfMost5Selling() {
-        String[] Most5Selling = {"laptop" ,"Milk" ,"Yougert" , "car" , "egg"};
+        String[] Most5Selling = {"egg" ,"laptop" ,"Milk" , "Yougert" , "car"};
         String[] Most5Selling2 = {""};
         String[] Most5SellingCompare = cashierDAOImp.getNameOfMost5Selling();
         assertAll(
@@ -32,7 +35,7 @@ class CashierDAOImpTest {
 
     @org.junit.jupiter.api.Test
     void getMost5Selling() {
-        int[] Most5Selling = {100, 41, 40, 34, 26};
+        int[] Most5Selling = {--numSales, 100, 41, 40, 34};
         int[] Most5Selling2 = {0};
         int[] Most5SellingCompare = cashierDAOImp.getMost5Selling();
         assertAll(
@@ -40,7 +43,7 @@ class CashierDAOImpTest {
                 () -> assertEquals(false, Arrays.equals(Most5Selling2, Most5SellingCompare))
         );
         ProductDAOImp productDAO = new ProductDAOImp();
-        productDAO.deleteProduct(new Product(i,"laptop",1500,2000,2,Date.valueOf("2023-07-02"), Date.valueOf("2023-02-02"), 100, "USA", "Electronics"));
+        productDAO.deleteProduct(new Product(++i,"laptop",1500,2000,2,Date.valueOf("2023-07-02"), Date.valueOf("2023-02-02"), 100, "USA", "Electronics"));
         assertAll(
                 () -> assertEquals(null, cashierDAOImp.getNameOfMost5Selling())
         );
@@ -50,7 +53,7 @@ class CashierDAOImpTest {
     @org.junit.jupiter.api.Test
     void getProduct() {
         //boolean null or return product
-        Product p = new Product(2,"egg",5,7,4, Date.valueOf("2022-02-02"),Date.valueOf("2022-02-01"),26,"Egypt","Dairy");
+        Product p = new Product(2,"egg",5,7,++q, Date.valueOf("2022-02-02"),Date.valueOf("2022-02-01"),--numSales,"Egypt","Dairy");
         assertAll(
                 () -> assertEquals(null, cashierDAOImp.getProduct(100)),
                 () -> assertEquals(p.toString(),cashierDAOImp.getProduct(2).toString())
@@ -60,21 +63,22 @@ class CashierDAOImpTest {
     @org.junit.jupiter.api.Test
     void isExist() {
         assertAll(
-                () -> assertEquals(false, cashierDAOImp.isExist(100)),
-                () -> assertEquals(true,  cashierDAOImp.isExist(5))
+                () -> assertEquals(false, cashierDAOImp.isExist(150)),
+                () -> assertEquals(true,  cashierDAOImp.isExist(2))
         );
     }
 
     @org.junit.jupiter.api.Test
     void mostSelling() {
-        getMost5Selling();
+        i+=2;
         getNameOfMost5Selling();
+        getMost5Selling();
     }
 
     @org.junit.jupiter.api.Test
     void updateNumsOfSales_Quantity() {
         //update sales + 1 quantity -1
-        Product p = new Product(2,"egg",5,7,3, Date.valueOf("2022-02-02"),Date.valueOf("2022-02-01"),27,"Egypt","Dairy");
+        Product p = new Product(2,"egg",5,7,q, Date.valueOf("2022-02-02"),Date.valueOf("2022-02-01"),numSales,"Egypt","Dairy");
         cashierDAOImp.updateNumsOfSales_Quantity(p,2);
         assertAll(
                 () -> assertEquals(cashierDAOImp.getProduct(2).toString(),p.toString())
@@ -85,9 +89,9 @@ class CashierDAOImpTest {
     void newId() {
         //customer add 2 id's
         assertAll(
-                () -> assertEquals(24,cashierDAOImp.newId()),
-                () -> assertEquals(25,cashierDAOImp.newId()),
-                () -> assertNotEquals(25,cashierDAOImp.newId())
+                () -> assertEquals(id,cashierDAOImp.newId()),
+                () -> assertEquals(++ id,cashierDAOImp.newId()),
+                () -> assertNotEquals(id++,cashierDAOImp.newId())
         );
     }
 }
