@@ -3,15 +3,16 @@ package com.example.pos_system.DAO;
 import com.example.pos_system.model.Employees;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.sql.*;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class EmployeesDAOImp implements EmployeeDAO{
     @Override
     public ObservableList<Employees> findAll() {
-        Connection conn= DBConnection.getConnection();
+        Connection conn = DBConnection.getConnection();
         if (conn==null)
             return null;
         ObservableList<Employees> employees= FXCollections.observableArrayList();
@@ -63,7 +64,7 @@ public class EmployeesDAOImp implements EmployeeDAO{
     }
 
     private Employees buildEmployee(ResultSet resultSet) throws SQLException {
-        String gender=null;
+        String gender;
         if (resultSet.getBoolean("gender")){
             gender="Male";
         }else{
@@ -134,9 +135,7 @@ public class EmployeesDAOImp implements EmployeeDAO{
             try (PreparedStatement preparedStatement=conn.prepareStatement(query1)){
                 setEmployee(employee, preparedStatement);
                 preparedStatement.setString(11,username);
-
                 preparedStatement.executeUpdate();
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -178,6 +177,10 @@ public class EmployeesDAOImp implements EmployeeDAO{
     public boolean isExist(String userName) {
         Connection conn= DBConnection.getConnection();
         String query="select * from employees where userName=?";
+        return findEmployee(userName, conn, query);
+    }
+
+    private boolean findEmployee(String userName, Connection conn, String query) {
         try (PreparedStatement preparedStatement=conn.prepareStatement(query)){
             preparedStatement.setString(1,userName);
             ResultSet resultSet= preparedStatement.executeQuery();
@@ -199,21 +202,7 @@ public class EmployeesDAOImp implements EmployeeDAO{
     public boolean duplicateID(String ID) {
         Connection conn= DBConnection.getConnection();
         String query="select * from employees where id=?";
-        try (PreparedStatement preparedStatement=conn.prepareStatement(query)){
-            preparedStatement.setString(1,ID);
-            ResultSet resultSet= preparedStatement.executeQuery();
-            return resultSet.isBeforeFirst();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                conn.close();
-            } catch (SQLException er) {
-                er.printStackTrace();
-            }
-        }
-        return true;
+        return findEmployee(ID, conn, query);
     }
 
     public boolean checkPassword(String username,String password){
