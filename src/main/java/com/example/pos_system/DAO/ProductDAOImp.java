@@ -29,13 +29,8 @@ public class ProductDAOImp implements ProductDAO {
         }
         return daysLeftForExpire;
     }
-    @Override
-    public void addNewProduct(Product product) {
-        Connection conn= DBConnection.getConnection();
-        if (conn==null)
-        {return;}
-        String query ="INSERT INTO product (proName,priceA,priceB,quantity,EXpDate,prodDate,numOfSales,counteryofprod,category)" +
-                "VALUES (?,?,?,?,?,?,?,?,?)";
+    public boolean addproduct(Connection conn,String query,Product product)
+    {
         try (PreparedStatement preparedStatement=conn.prepareStatement(query))
         {
             preparedStatement.setString(1, product.getProName());
@@ -49,9 +44,10 @@ public class ProductDAOImp implements ProductDAO {
             preparedStatement.setString(9, product.getCategory());
             preparedStatement.executeUpdate();
         }
-        catch (Exception e)
+        catch (SQLException e)
         {
             e.printStackTrace();
+            return false;
         }finally {
             try {
                 conn.close();
@@ -59,6 +55,18 @@ public class ProductDAOImp implements ProductDAO {
                 er.printStackTrace();
             }
         }
+        return true;
+    }
+    @Override
+    public void addNewProduct(Product product) {
+        Connection conn= DBConnection.getConnection();
+        if (conn==null)
+        {return ;}
+        String query ="INSERT INTO product (proName,priceA,priceB,quantity,EXpDate,prodDate,numOfSales,counteryofprod,category)" +
+                "VALUES (?,?,?,?,?,?,?,?,?)";
+
+            addproduct(conn,query,product);
+
     }
 
     @Override
@@ -67,6 +75,7 @@ public class ProductDAOImp implements ProductDAO {
         if (conn==null)
         {return;}
         String query ="DELETE FROM product WHERE id=?;";
+
         try (PreparedStatement preparedStatement=conn.prepareStatement(query))
         {
             preparedStatement.setInt(1,product.getId());

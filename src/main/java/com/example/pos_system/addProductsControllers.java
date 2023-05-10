@@ -115,7 +115,6 @@ public class addProductsControllers {
             countryFild.setText("");
             categoryFild.setText("");
             prodDateFild.setText("");
-
         }
 
     }

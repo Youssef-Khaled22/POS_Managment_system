@@ -13,7 +13,8 @@ public class DBConnection {
             reader = new BufferedReader(new FileReader("F:/dblink.txt"));
             connection = DriverManager.getConnection(reader.readLine(), reader.readLine(), reader.readLine());
         } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
+            return null;
         } finally {
             try {
                 reader.close();
