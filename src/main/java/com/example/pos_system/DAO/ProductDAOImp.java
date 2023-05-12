@@ -29,7 +29,7 @@ public class ProductDAOImp implements ProductDAO {
         }
         return daysLeftForExpire;
     }
-    public boolean addproduct(Connection conn,String query,Product product)
+    public void addproduct(Connection conn,String query,Product product) throws SQLException
     {
         try (PreparedStatement preparedStatement=conn.prepareStatement(query))
         {
@@ -46,8 +46,8 @@ public class ProductDAOImp implements ProductDAO {
         }
         catch (SQLException e)
         {
-            e.printStackTrace();
-            return false;
+            throw e;
+
         }finally {
             try {
                 conn.close();
@@ -55,7 +55,6 @@ public class ProductDAOImp implements ProductDAO {
                 er.printStackTrace();
             }
         }
-        return true;
     }
     @Override
     public void addNewProduct(Product product) {
@@ -65,33 +64,40 @@ public class ProductDAOImp implements ProductDAO {
         String query ="INSERT INTO product (proName,priceA,priceB,quantity,EXpDate,prodDate,numOfSales,counteryofprod,category)" +
                 "VALUES (?,?,?,?,?,?,?,?,?)";
 
+        try {
             addproduct(conn,query,product);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
-
-    @Override
-    public void deleteProduct(Product product) {
-        Connection conn= DBConnection.getConnection();
-        if (conn==null)
-        {return;}
-        String query ="DELETE FROM product WHERE id=?;";
-
+    public void DeleteProduct(Connection conn,String query,Product product)
+    {
         try (PreparedStatement preparedStatement=conn.prepareStatement(query))
         {
             preparedStatement.setInt(1,product.getId());
             preparedStatement.executeUpdate();
         }
-        catch (Exception e)
+        catch (SQLException e)
         {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         finally {
             try {
                 conn.close();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
+    }
+    @Override
+    public void deleteProduct(Product product) {
+        Connection conn= DBConnection.getConnection();
+        if (conn==null)
+        {throw new RuntimeException();}
+        String query ="DELETE FROM product WHERE id=?;";
+        DeleteProduct(conn,query,product);
+
     }
 
     @Override
@@ -160,14 +166,26 @@ public class ProductDAOImp implements ProductDAO {
             Nearest5ExpDate[i] = productList.get(i).getEXpDate();
             NameOfNearest5ExpDate[i] = productList.get(i).getProName();
         }
+
+
     }
 
     @Override
     public int allSales() {
+
+        String query="SELECT * FROM product ";
+        Connection connection= DBConnection.getConnection();
+        if(connection==null)
+        {
+            return -1;
+        }
+        return allsales(connection,query);
+
+    }
+    public int allsales(Connection connection,String query)
+    {
         int count=0;
         int sum=0;
-        String query="SELECT * FROM product ";
-        Connection connection= DBConnection.getConnection();;
         try(PreparedStatement preparedStatement=connection.prepareStatement(query)) {
             productList.clear();
             ResultSet resultSet=preparedStatement.executeQuery();

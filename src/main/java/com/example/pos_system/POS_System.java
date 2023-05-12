@@ -28,7 +28,7 @@ public class POS_System extends Application {
     public void start(Stage stage) throws Exception {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("pos.png"))));
-        Scene scene = new Scene(new FXMLLoader(POS_System.class.getResource("StartPage.fxml")).load());
+        Scene scene = new Scene(new FXMLLoader(POS_System.class.getResource("Cashier.fxml")).load());
         Parent root= scene.getRoot();
         root.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
