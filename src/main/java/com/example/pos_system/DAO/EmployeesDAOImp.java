@@ -20,19 +20,19 @@ public class EmployeesDAOImp implements EmployeeDAO{
         return getEmployees(conn, employees, query);
     }
 
-    private ObservableList<Employees> getEmployees(Connection conn, ObservableList<Employees> employees, String query) {
+    ObservableList<Employees> getEmployees(Connection conn, ObservableList<Employees> employees, String query) {
         try(PreparedStatement preparedStatement=conn.prepareStatement(query)){
             ResultSet resultSet=preparedStatement.executeQuery();
             while (resultSet.next()){
                 employees.add(buildEmployee(resultSet));
             }
-        }catch (SQLException e){
-            e.printStackTrace();
+        }catch (NullPointerException | SQLException e){
+            employees = null;
         }finally {
             try {
                 conn.close();
-            }catch (SQLException er){
-                er.printStackTrace();
+            }catch (NullPointerException | SQLException e){
+                employees = null;
             }
         }
         return employees;
@@ -40,30 +40,33 @@ public class EmployeesDAOImp implements EmployeeDAO{
 
     @Override
     public Employees findByUserName(String userName) {
-        Connection conn= DBConnection.getConnection();
+        Connection conn = DBConnection.getConnection();
         if (conn==null)
             return null;
         String query="select * from employees where userName=?";
+        return getEmployee(conn,userName,query);
+    }
+
+    Employees getEmployee(Connection conn,String userName,String query){
         try (PreparedStatement preparedStatement=conn.prepareStatement(query)){
             preparedStatement.setString(1,userName);
             ResultSet resultSet=preparedStatement.executeQuery();
             if (resultSet.next())
                 return buildEmployee(resultSet);
         }
-        catch (SQLException e){
-            e.printStackTrace();
+        catch (NullPointerException | SQLException e){
+            return null;
         }
         finally {
             try {
                 conn.close();
-            }catch (SQLException er){
-                er.printStackTrace();
+            }catch (NullPointerException | SQLException e){
+                return null;
             }
         }
         return null;
     }
-
-    private Employees buildEmployee(ResultSet resultSet) throws SQLException {
+    Employees buildEmployee(ResultSet resultSet) throws SQLException {
         String gender;
         if (resultSet.getBoolean("gender")){
             gender="Male";
@@ -90,26 +93,27 @@ public class EmployeesDAOImp implements EmployeeDAO{
             return;
         if (!isExist(employee.getUserName())) {
             String query = "insert into employees (id,name,jop,gender,salary,address,birthDate,phone,userName,password) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-                setEmployee(employee, preparedStatement);
-                preparedStatement.executeUpdate();
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
-            finally {
-                try {
-                    conn.close();
-                } catch (SQLException er) {
-                    er.printStackTrace();
-                }
-            }
+            addEmployee(conn,employee,query);
         }
-        else
-            System.out.println("The User name is already exist");
     }
 
-    private void setEmployee(Employees employee, PreparedStatement preparedStatement) throws SQLException {
+    void addEmployee(Connection conn,Employees employee,String query){
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            setEmployee(employee, preparedStatement);
+            preparedStatement.executeUpdate();
+        }
+        catch (NullPointerException | SQLException e) {
+            return;
+        }
+        finally {
+            try {
+                conn.close();
+            } catch (NullPointerException | SQLException er) {
+                return;
+            }
+        }
+    }
+    void setEmployee(Employees employee, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, employee.getId());
         preparedStatement.setString(2, employee.getName());
         preparedStatement.setString(3, employee.getJop());
@@ -131,48 +135,52 @@ public class EmployeesDAOImp implements EmployeeDAO{
         if (conn==null)
             return;
         if (isExist(username)){
-            String query1="update employees set id=?,name=?,jop=?,gender=?,salary=?,address=?,birthDate=?,phone=?,userName=?,password=? where userName=?";
-            try (PreparedStatement preparedStatement=conn.prepareStatement(query1)){
-                setEmployee(employee, preparedStatement);
-                preparedStatement.setString(11,username);
-                preparedStatement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            finally {
-                try {
-                    conn.close();
-                } catch (SQLException er) {
-                    er.printStackTrace();
-                }
-            }
+            String query="update employees set id=?,name=?,jop=?,gender=?,salary=?,address=?,birthDate=?,phone=?,userName=?,password=? where userName=?";
+            updateEmployee(conn,employee,query,username);
         }
-        else
-            System.out.println("The username isn't exist");
     }
 
+    void updateEmployee(Connection conn,Employees employee,String query,String username){
+        try (PreparedStatement preparedStatement=conn.prepareStatement(query)){
+            setEmployee(employee, preparedStatement);
+            preparedStatement.setString(11,username);
+            preparedStatement.executeUpdate();
+        } catch (NullPointerException | SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                conn.close();
+            } catch (NullPointerException | SQLException er) {
+                er.printStackTrace();
+            }
+        }
+    }
     @Override
     public void deleteByUserName(String userName) {
         Connection conn= DBConnection.getConnection();
         if (conn==null)
             return;
         String query="delete from employees where userName=?";
+        deleteEmployee(conn,query,userName);
+    }
+
+    void deleteEmployee(Connection conn,String query,String userName){
         try (PreparedStatement preparedStatement=conn.prepareStatement(query)){
             preparedStatement.setString(1,userName);
 
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (NullPointerException | SQLException e) {
             e.printStackTrace();
         }
         finally {
             try {
                 conn.close();
-            } catch (SQLException er) {
+            } catch (NullPointerException | SQLException er) {
                 er.printStackTrace();
             }
         }
     }
-
     @Override
     public boolean isExist(String userName) {
         Connection conn= DBConnection.getConnection();
@@ -180,28 +188,27 @@ public class EmployeesDAOImp implements EmployeeDAO{
         return findEmployee(userName, conn, query);
     }
 
-    private boolean findEmployee(String userName, Connection conn, String query) {
+    boolean findEmployee(String userName_or_ID, Connection conn, String query) {
         try (PreparedStatement preparedStatement=conn.prepareStatement(query)){
-            preparedStatement.setString(1,userName);
+            preparedStatement.setString(1,userName_or_ID);
             ResultSet resultSet= preparedStatement.executeQuery();
             return resultSet.isBeforeFirst();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (NullPointerException | SQLException e) {
+            return false;
         }
         finally {
             try {
                 conn.close();
-            } catch (SQLException er) {
-                er.printStackTrace();
+            } catch (NullPointerException | SQLException e) {
+                return false;
             }
         }
-        return true;
     }
 
     @Override
     public boolean duplicateID(String ID) {
-        Connection conn= DBConnection.getConnection();
-        String query="select * from employees where id=?";
+        Connection conn = DBConnection.getConnection();
+        String query="select * from employees where id = ?";
         return findEmployee(ID, conn, query);
     }
 
