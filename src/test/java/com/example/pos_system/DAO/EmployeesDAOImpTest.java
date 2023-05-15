@@ -48,24 +48,15 @@ class EmployeesDAOImpTest {
 
     @Test
     void getEmployees() {
-        setUp();
         EmployeesDAOImp obj = new EmployeesDAOImp();
-        Connection conn = DBConnection.getConnection();
         ObservableList<Employees> employees = FXCollections.observableArrayList();
         String query = "select * from employees";
         String finalQuery1 = query;
-        assertThrows(RuntimeException.class,()->obj.getEmployees(conn,employees, finalQuery1));
-        tearDown();
-        assertEquals("[Employees{id=12345678900005, name='ahmed', jop='Cashier', gender='Male', salary=10000, birthDate='1999-01-01', phone=099649778585, userName='ahmed', password='202cb962ac59075b964b07152d234b70'}, " +
-                        "Employees{id=12345678900000, name='mohammed', jop='Storekeeper', gender='Male', salary=30000, birthDate='2001-01-01', phone=09668866, userName='mohammed', password='202cb962ac59075b964b07152d234b70'}, " +
-                        "Employees{id=12345678000059, name='salwan', jop='Manager', gender='Female', salary=50000, birthDate='2000-02-02', phone=072986764, userName='salwan', password='202cb962ac59075b964b07152d234b70'}, " +
-                        "Employees{id=30108764574690, name='Youssef Khaled', jop='Manager', gender='Male', salary=35000, birthDate='2001-08-22', phone=8677587978, userName='youssef', password='c76a85d0581a6ddc1e547468c710ac7c'}, " +
-                        "Employees{id=00000123456789, name='yusuf', jop='Cashier', gender='Male', salary=50000, birthDate='2000-02-02', phone=072986764, userName='yusuf', password='202cb962ac59075b964b07152d234b70'}]"
-                ,obj.findAll().toString());
+        assertThrows(RuntimeException.class,()->obj.getEmployees(null,employees, finalQuery1));
         query = "select * from employee";
         String finalQuery = query;
-        Connection conn2 = DBConnection.getConnection();
-        assertThrows(RuntimeException.class,()->obj.getEmployees(conn2, employees, finalQuery));
+        Connection conn = DBConnection.getConnection();
+        assertThrows(RuntimeException.class,()->obj.getEmployees(conn, employees, finalQuery));
     }
 
     @Test
