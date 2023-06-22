@@ -1,0 +1,293 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CustomerDAOImp</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.pos_system.DAO</a>
+</div>
+
+<h1>Coverage Summary for Class: CustomerDAOImp (com.example.pos_system.DAO)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CustomerDAOImp</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/122)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.pos_system.DAO;
+&nbsp;
+&nbsp;import com.example.pos_system.model.Customer;
+&nbsp;import javafx.collections.FXCollections;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;
+&nbsp;import java.sql.Connection;
+&nbsp;import java.sql.PreparedStatement;
+&nbsp;import java.sql.ResultSet;
+&nbsp;import java.sql.SQLException;
+&nbsp;
+<b class="nc">&nbsp;public class CustomerDAOImp implements CustomerDAO {</b>
+&nbsp;
+&nbsp;    private float averageRating;
+&nbsp;
+&nbsp;    public float getAverageRating() {
+<b class="nc">&nbsp;        FeedbackAndRating();</b>
+<b class="nc">&nbsp;        return averageRating;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Customer getCustomer(int id) {
+<b class="nc">&nbsp;        if (isExist(id)) {</b>
+<b class="nc">&nbsp;            Connection connection = DBConnection.getConnection();</b>
+<b class="nc">&nbsp;            String query = &quot;select * from customer WHERE id = ?&quot;;</b>
+<b class="nc">&nbsp;            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {</b>
+<b class="nc">&nbsp;                preparedStatement.setInt(1, id);</b>
+<b class="nc">&nbsp;                ResultSet resultSet = preparedStatement.executeQuery();</b>
+<b class="nc">&nbsp;                while (resultSet.next()) {</b>
+<b class="nc">&nbsp;                    return new Customer(</b>
+<b class="nc">&nbsp;                            resultSet.getInt(&quot;id&quot;),</b>
+<b class="nc">&nbsp;                            resultSet.getInt(&quot;servesEvaluation&quot;),</b>
+<b class="nc">&nbsp;                            resultSet.getFloat(&quot;cashback&quot;),</b>
+<b class="nc">&nbsp;                            resultSet.getString(&quot;massage&quot;)</b>
+&nbsp;                    );
+&nbsp;                }
+<b class="nc">&nbsp;            } catch (SQLException e) {</b>
+<b class="nc">&nbsp;                throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean isExist(int id) {
+<b class="nc">&nbsp;        Connection conn = DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        String quary = &quot;select * from customer where id=?&quot;;</b>
+<b class="nc">&nbsp;        try (PreparedStatement preparedStatement = conn.prepareStatement(quary)) {</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(1, id);</b>
+<b class="nc">&nbsp;            ResultSet resultSet = preparedStatement.executeQuery();</b>
+<b class="nc">&nbsp;            return resultSet.isBeforeFirst();</b>
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            try {</b>
+<b class="nc">&nbsp;                conn.close();</b>
+<b class="nc">&nbsp;            } catch (SQLException er) {</b>
+<b class="nc">&nbsp;                er.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getCashback(int id) {
+<b class="nc">&nbsp;        Connection conn = DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        if (conn == null) {</b>
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        String query = &quot;SELECT cashback FROM customer WHERE id=?;&quot;;</b>
+<b class="nc">&nbsp;        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(1, id);</b>
+<b class="nc">&nbsp;            ResultSet resultSet = preparedStatement.executeQuery();</b>
+<b class="nc">&nbsp;            if (resultSet == null) {</b>
+<b class="nc">&nbsp;                return 0;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            while (resultSet.next()) {</b>
+<b class="nc">&nbsp;                return resultSet.getInt(&quot;cashback&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            try {</b>
+<b class="nc">&nbsp;                conn.close();</b>
+<b class="nc">&nbsp;            } catch (SQLException er) {</b>
+<b class="nc">&nbsp;                er.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return -3;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void UpdateCashback(Customer customer, int id) {
+<b class="nc">&nbsp;        Connection conn = DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        if (conn == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        String query = &quot;UPDATE customer \n&quot; +</b>
+&nbsp;                &quot;SET id=?,servesEvaluation=?, cashback=?, massage=?&quot; +
+&nbsp;                &quot;WHERE id=?; &quot;;
+<b class="nc">&nbsp;        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(1, customer.getId());</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(2, customer.getServesEvaluation());</b>
+<b class="nc">&nbsp;            preparedStatement.setFloat(3, customer.getCashback());</b>
+<b class="nc">&nbsp;            preparedStatement.setString(4, customer.getMassage());</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(5, id);</b>
+<b class="nc">&nbsp;            preparedStatement.executeUpdate();</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            try {</b>
+<b class="nc">&nbsp;                conn.close();</b>
+<b class="nc">&nbsp;            } catch (SQLException er) {</b>
+<b class="nc">&nbsp;                er.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setFeedback(String message, int id) {
+<b class="nc">&nbsp;        Connection conn = DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        if (conn == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        String query = &quot;UPDATE customer &quot; +</b>
+&nbsp;                &quot;SET massage = ? WHERE id = ?&quot;;
+<b class="nc">&nbsp;        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {</b>
+<b class="nc">&nbsp;            preparedStatement.setString(1, message);</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(2, id);</b>
+<b class="nc">&nbsp;            preparedStatement.executeUpdate();</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            try {</b>
+<b class="nc">&nbsp;                conn.close();</b>
+<b class="nc">&nbsp;            } catch (SQLException er) {</b>
+<b class="nc">&nbsp;                er.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setrating(int rating, int id) {
+<b class="nc">&nbsp;        Connection conn = DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        if (conn == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        String query = &quot;UPDATE customer &quot; +</b>
+&nbsp;                &quot;SET servesEvaluation = ? WHERE id = ?&quot;;
+<b class="nc">&nbsp;        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(1, rating);</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(2, id);</b>
+<b class="nc">&nbsp;            preparedStatement.executeUpdate();</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        } finally {
+<b class="nc">&nbsp;            try {</b>
+<b class="nc">&nbsp;                conn.close();</b>
+<b class="nc">&nbsp;            } catch (SQLException er) {</b>
+<b class="nc">&nbsp;                er.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ObservableList FeedbackAndRating() {
+<b class="nc">&nbsp;        ObservableList&lt;Customer&gt; customerList = FXCollections.observableArrayList();</b>
+<b class="nc">&nbsp;        int sum = 0, count = 0;</b>
+<b class="nc">&nbsp;        String query = &quot;SELECT *FROM customer ORDER BY servesEvaluation desc &quot;;</b>
+<b class="nc">&nbsp;        Connection connection = DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {</b>
+<b class="nc">&nbsp;            customerList.clear();</b>
+<b class="nc">&nbsp;            ResultSet resultSet = preparedStatement.executeQuery();</b>
+<b class="nc">&nbsp;            while (resultSet.next()) {</b>
+<b class="nc">&nbsp;                customerList.add(new Customer(</b>
+<b class="nc">&nbsp;                        resultSet.getInt(&quot;id&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getInt(&quot;servesEvaluation&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getFloat(&quot;cashback&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getString(&quot;massage&quot;)</b>
+&nbsp;                ));
+<b class="nc">&nbsp;                sum += customerList.get(count).getServesEvaluation();</b>
+<b class="nc">&nbsp;                count++;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        averageRating = (float) sum / count;</b>
+<b class="nc">&nbsp;        return customerList;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-14 17:55</div>
+</div>
+</body>
+</html>

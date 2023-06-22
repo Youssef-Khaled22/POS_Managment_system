@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CustomerDAOTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.pos_system.DAO</a>
+</div>
+
+<h1>Coverage Summary for Class: CustomerDAOTest (com.example.pos_system.DAO)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CustomerDAOTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.pos_system.DAO;
+&nbsp;
+&nbsp;import com.example.pos_system.model.Customer;
+&nbsp;import org.junit.jupiter.api.Test;
+&nbsp;
+&nbsp;import static org.junit.jupiter.api.Assertions.*;
+&nbsp;
+<b class="nc">&nbsp;class CustomerDAOTest {</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void getCustomer() {
+<b class="nc">&nbsp;        CustomerDAOImp d=new CustomerDAOImp();</b>
+&nbsp;
+<b class="nc">&nbsp;        Customer c=new Customer(1,5,0,&quot;&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        assertAll(</b>
+<b class="nc">&nbsp;                () -&gt; assertEquals(c.toString(),d.getCustomer(1).toString())</b>
+&nbsp;
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void isExist() {
+<b class="nc">&nbsp;        CustomerDAOImp d=new CustomerDAOImp();</b>
+<b class="nc">&nbsp;        assertAll(</b>
+<b class="nc">&nbsp;                () -&gt; assertEquals(true,d.isExist(1)),</b>
+<b class="nc">&nbsp;                () -&gt; assertEquals(false,d.isExist(4))</b>
+&nbsp;
+&nbsp;
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void getCashback() {
+<b class="nc">&nbsp;        CustomerDAOImp d=new CustomerDAOImp();</b>
+<b class="nc">&nbsp;        assertAll(</b>
+<b class="nc">&nbsp;                () -&gt; assertEquals(0,d.getCashback(1))</b>
+&nbsp;
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void updateCashback() {
+<b class="nc">&nbsp;        CustomerDAOImp d=new CustomerDAOImp();</b>
+<b class="nc">&nbsp;        Customer s=new Customer(1,5,300,&quot;&quot;);</b>
+<b class="nc">&nbsp;        d.UpdateCashback(s,1);</b>
+<b class="nc">&nbsp;        assertAll(</b>
+<b class="nc">&nbsp;                () -&gt; assertEquals(300,d.getCashback(1))</b>
+&nbsp;
+&nbsp;        );
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void setFeedback() {
+<b class="nc">&nbsp;        CustomerDAOImp d=new CustomerDAOImp();</b>
+<b class="nc">&nbsp;        Customer c=new Customer(1,5,300,&quot;it&#39;s good service&quot;);</b>
+<b class="nc">&nbsp;        d.setFeedback(&quot;it&#39;s good service&quot;,1);</b>
+<b class="nc">&nbsp;        assertAll(</b>
+<b class="nc">&nbsp;                () -&gt; assertEquals(c.toString(),d.getCustomer(1).toString())</b>
+&nbsp;
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void setrating() {
+<b class="nc">&nbsp;        CustomerDAOImp d=new CustomerDAOImp();</b>
+<b class="nc">&nbsp;        Customer c=new Customer(1,1,300,&quot;it&#39;s good service&quot;);</b>
+<b class="nc">&nbsp;        d.setrating(1,1);</b>
+<b class="nc">&nbsp;        assertAll(</b>
+<b class="nc">&nbsp;                () -&gt; assertEquals(c.toString(),d.getCustomer(1).toString())</b>
+&nbsp;
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    void feedbackAndRating() {
+<b class="nc">&nbsp;        CustomerDAOImp d=new CustomerDAOImp();</b>
+<b class="nc">&nbsp;        assertAll(</b>
+<b class="nc">&nbsp;                () -&gt; assertEquals(3,d.getAverageRating())</b>
+&nbsp;
+&nbsp;        );
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-14 17:55</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,320 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ProductDAOImp</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.pos_system.DAO</a>
+</div>
+
+<h1>Coverage Summary for Class: ProductDAOImp (com.example.pos_system.DAO)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProductDAOImp</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/135)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.pos_system.DAO;
+&nbsp;
+&nbsp;import com.example.pos_system.model.CurrentDate;
+&nbsp;import com.example.pos_system.model.Product;
+&nbsp;import javafx.collections.FXCollections;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;
+&nbsp;import java.sql.*;
+&nbsp;
+<b class="nc">&nbsp;public class ProductDAOImp implements ProductDAO {</b>
+<b class="nc">&nbsp;    ObservableList&lt;Product&gt; productList = FXCollections.observableArrayList();</b>
+<b class="nc">&nbsp;    private Date [] Nearest5ExpDate = new Date[5];</b>
+<b class="nc">&nbsp;    private String[] NameOfNearest5ExpDate = new String[5];</b>
+<b class="nc">&nbsp;    private int[] daysLeftForExpire = new int[5];</b>
+&nbsp;    public String[] getNameOfNearest5ExpDate(){
+<b class="nc">&nbsp;        ExpDate();</b>
+<b class="nc">&nbsp;        return NameOfNearest5ExpDate;</b>
+&nbsp;    }
+&nbsp;    public Date[] getNearest5ExpDate() {
+<b class="nc">&nbsp;        ExpDate();</b>
+<b class="nc">&nbsp;        return Nearest5ExpDate;</b>
+&nbsp;    }
+&nbsp;    public int[] getdaysLeftForExpire(){
+<b class="nc">&nbsp;        ExpDate();</b>
+<b class="nc">&nbsp;        CurrentDate date = new CurrentDate();</b>
+<b class="nc">&nbsp;        Date now= Date.valueOf(date.TodayDate());</b>
+<b class="nc">&nbsp;        for (int i=0;i&lt;5;i++){</b>
+<b class="nc">&nbsp;            daysLeftForExpire[i]= (int) ((getNearest5ExpDate()[i].getTime()-now.getTime())/1000/60/60/24);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return daysLeftForExpire;</b>
+&nbsp;    }
+&nbsp;    public void addproduct(Connection conn,String query,Product product) throws SQLException
+&nbsp;    {
+<b class="nc">&nbsp;        try (PreparedStatement preparedStatement=conn.prepareStatement(query))</b>
+&nbsp;        {
+<b class="nc">&nbsp;            preparedStatement.setString(1, product.getProName());</b>
+<b class="nc">&nbsp;            preparedStatement.setFloat(2, product.getPriceA());</b>
+<b class="nc">&nbsp;            preparedStatement.setFloat(3, product.getPriceB());</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(4, product.getQuantity());</b>
+<b class="nc">&nbsp;            preparedStatement.setDate(5, product.getEXpDate());</b>
+<b class="nc">&nbsp;            preparedStatement.setDate(6,product.getProdDate());</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(7,product.getNumOfSales());</b>
+<b class="nc">&nbsp;            preparedStatement.setString(8, product.getCounteryofprod());</b>
+<b class="nc">&nbsp;            preparedStatement.setString(9, product.getCategory());</b>
+<b class="nc">&nbsp;            preparedStatement.executeUpdate();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        catch (SQLException e)</b>
+&nbsp;        {
+<b class="nc">&nbsp;            throw e;</b>
+&nbsp;
+&nbsp;        }finally {
+<b class="nc">&nbsp;            try {</b>
+<b class="nc">&nbsp;                conn.close();</b>
+<b class="nc">&nbsp;            } catch (SQLException er) {</b>
+<b class="nc">&nbsp;                er.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    @Override
+&nbsp;    public void addNewProduct(Product product) {
+<b class="nc">&nbsp;        Connection conn= DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        if (conn==null)</b>
+&nbsp;        {return ;}
+<b class="nc">&nbsp;        String query =&quot;INSERT INTO product (proName,priceA,priceB,quantity,EXpDate,prodDate,numOfSales,counteryofprod,category)&quot; +</b>
+&nbsp;                &quot;VALUES (?,?,?,?,?,?,?,?,?)&quot;;
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            addproduct(conn,query,product);</b>
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;    public void DeleteProduct(Connection conn,String query,Product product)
+&nbsp;    {
+<b class="nc">&nbsp;        try (PreparedStatement preparedStatement=conn.prepareStatement(query))</b>
+&nbsp;        {
+<b class="nc">&nbsp;            preparedStatement.setInt(1,product.getId());</b>
+<b class="nc">&nbsp;            preparedStatement.executeUpdate();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        catch (SQLException e)</b>
+&nbsp;        {
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;        finally {
+<b class="nc">&nbsp;            try {</b>
+<b class="nc">&nbsp;                conn.close();</b>
+<b class="nc">&nbsp;            } catch (SQLException e) {</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    @Override
+&nbsp;    public void deleteProduct(Product product) {
+<b class="nc">&nbsp;        Connection conn= DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        if (conn==null)</b>
+<b class="nc">&nbsp;        {throw new RuntimeException();}</b>
+<b class="nc">&nbsp;        String query =&quot;DELETE FROM product WHERE id=?;&quot;;</b>
+<b class="nc">&nbsp;        DeleteProduct(conn,query,product);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void ubdateProduct(Product product){
+<b class="nc">&nbsp;        Connection conn= DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        if (conn==null)</b>
+&nbsp;        {return;}
+<b class="nc">&nbsp;        String query=&quot;UPDATE product\n&quot; +</b>
+&nbsp;                &quot;SET proName = ?,priceA=?,priceB=?,numOfSales=?,counteryofprod= ?,category= ?,quantity=?,prodDate= ?,EXpDate=? &quot; +
+&nbsp;                &quot;WHERE id=?; &quot;;
+<b class="nc">&nbsp;        try(PreparedStatement preparedStatement=conn.prepareStatement(query))</b>
+&nbsp;        {
+<b class="nc">&nbsp;            preparedStatement.setString(1,product.getProName());</b>
+<b class="nc">&nbsp;            preparedStatement.setFloat(2,product.getPriceA());</b>
+<b class="nc">&nbsp;            preparedStatement.setFloat(3,product.getPriceB());</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(4,product.getNumOfSales());</b>
+<b class="nc">&nbsp;            preparedStatement.setString(5,product.getCounteryofprod());</b>
+<b class="nc">&nbsp;            preparedStatement.setString(6,product.getCategory());</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(7,product.getQuantity());</b>
+<b class="nc">&nbsp;            preparedStatement.setDate(8, product.getProdDate());</b>
+<b class="nc">&nbsp;            preparedStatement.setDate(9, product.getEXpDate());</b>
+<b class="nc">&nbsp;            preparedStatement.setInt(10,product.getId());</b>
+<b class="nc">&nbsp;            preparedStatement.executeUpdate();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        catch (Exception e)</b>
+&nbsp;        {
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }finally
+&nbsp;        {
+<b class="nc">&nbsp;            try</b>
+&nbsp;            {
+<b class="nc">&nbsp;            conn.close();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            catch (SQLException er) {</b>
+<b class="nc">&nbsp;            er.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void ExpDate() {
+<b class="nc">&nbsp;        String query=&quot;SELECT *FROM product ORDER BY ExpDate LIMIT 5&quot;;</b>
+<b class="nc">&nbsp;        Connection connection= DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        try(PreparedStatement preparedStatement=connection.prepareStatement(query)) {</b>
+<b class="nc">&nbsp;            productList.clear();</b>
+<b class="nc">&nbsp;            ResultSet resultSet=preparedStatement.executeQuery();</b>
+<b class="nc">&nbsp;            while(resultSet.next())</b>
+&nbsp;            {
+<b class="nc">&nbsp;                productList.add(new Product(</b>
+<b class="nc">&nbsp;                        resultSet.getInt(&quot;id&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getString(&quot;proName&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getFloat(&quot;priceA&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getFloat(&quot;priceB&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getInt(&quot;quantity&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getDate(&quot;EXpDate&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getDate(&quot;prodDate&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getInt(&quot;numOfSales&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getString(&quot;counteryofprod&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getString(&quot;category&quot;)</b>
+&nbsp;                ));
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; 5; i++) {</b>
+<b class="nc">&nbsp;            Nearest5ExpDate[i] = productList.get(i).getEXpDate();</b>
+<b class="nc">&nbsp;            NameOfNearest5ExpDate[i] = productList.get(i).getProName();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int allSales() {
+&nbsp;
+<b class="nc">&nbsp;        String query=&quot;SELECT * FROM product &quot;;</b>
+<b class="nc">&nbsp;        Connection connection= DBConnection.getConnection();</b>
+<b class="nc">&nbsp;        if(connection==null)</b>
+&nbsp;        {
+<b class="nc">&nbsp;            return -1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return allsales(connection,query);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;    public int allsales(Connection connection,String query)
+&nbsp;    {
+<b class="nc">&nbsp;        int count=0;</b>
+<b class="nc">&nbsp;        int sum=0;</b>
+<b class="nc">&nbsp;        try(PreparedStatement preparedStatement=connection.prepareStatement(query)) {</b>
+<b class="nc">&nbsp;            productList.clear();</b>
+<b class="nc">&nbsp;            ResultSet resultSet=preparedStatement.executeQuery();</b>
+<b class="nc">&nbsp;            while(resultSet.next())</b>
+&nbsp;            {
+<b class="nc">&nbsp;                count++;</b>
+<b class="nc">&nbsp;                productList.add(new Product(</b>
+<b class="nc">&nbsp;                        resultSet.getInt(&quot;id&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getString(&quot;proName&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getFloat(&quot;priceA&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getFloat(&quot;priceB&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getInt(&quot;quantity&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getDate(&quot;EXpDate&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getDate(&quot;prodDate&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getInt(&quot;numOfSales&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getString(&quot;counteryofprod&quot;),</b>
+<b class="nc">&nbsp;                        resultSet.getString(&quot;category&quot;)</b>
+&nbsp;                ));
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; count; i++) {</b>
+<b class="nc">&nbsp;            sum+=productList.get(i).getNumOfSales();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return sum;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-05-14 17:55</div>
+</div>
+</body>
+</html>
