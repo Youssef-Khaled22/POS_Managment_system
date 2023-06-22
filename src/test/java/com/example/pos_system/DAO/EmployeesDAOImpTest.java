@@ -5,8 +5,6 @@ import com.example.pos_system.model.Employees;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Null;
-
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.sql.Connection;
